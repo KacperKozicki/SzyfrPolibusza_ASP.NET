@@ -1,0 +1,67 @@
+﻿@model Polibusz
+
+<h1>Szyfrowanie</h1>
+
+<form asp-controller="Polibusz" asp-action="Szyfrowanie" method="post">
+    <div class="form-group">
+        <label asp-for="Tekst">Tekst do zaszyfrowania:</label>
+        <input asp-for="Tekst" class="form-control" />
+        <span asp-validation-for="Tekst" class="text-danger"></span>
+    </div>
+
+    <!-- Przycisk do przywracania domyślnych wartości w macierzy -->
+    <button type="button" class="btn btn-secondary" onclick="restoreDefaultMatrix()">Przywróć domyślne wartości w macierzy</button>
+
+    <!-- Macierz 5x7 inputów -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th></th>
+                <th>1.</th>
+                <th>2.</th>
+                <th>3.</th>
+                <th>4.</th>
+                <th>5.</th>
+                <th>6.</th>
+                <th>7.</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < 5; i++)
+            {
+                <tr>
+                    <th>@(i + 1).</th>
+                    @for (int j = 0; j < 7; j++)
+                    {
+
+                        <td><input asp-for="Macierz[i][j]" value="@Model.Macierz[i][j]" class="form-control" data-macierz-input  /></td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit" class="btn btn-primary">Szyfruj</button>
+</form>
+
+<div class="mt-3">
+    <label>Zaszyfrowany tekst:</label>
+    <input asp-for="ZaszyfrowanyTekst" class="form-control" readonly />
+</div>
+
+<script>
+    function restoreDefaultMatrix() {
+        var defaultMatrix = @Html.Raw(Json.Serialize(Model.Macierz)); // Pobierz domyślną macierz z modelu
+
+        // Pobierz wszystkie inputy w macierzy
+        var inputElements = document.querySelectorAll('input[data-macierz-input]');
+
+        // Iteruj przez wszystkie inputy i ustaw domyślne wartości z domyślnej macierzy
+        inputElements.forEach(function (input, index) {
+            var rowIndex = Math.floor(index / 7);
+            var colIndex = index % 7;
+            input.value = defaultMatrix[rowIndex][colIndex];
+        });
+    }
+</script>
+
