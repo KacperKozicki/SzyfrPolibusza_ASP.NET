@@ -23,6 +23,9 @@ Aby rozpocząć pracę z SzyfrPolibusza_ASP.NET, postępuj zgodnie z poniższymi
 ## Użycie
 Po uruchomieniu projektu, przejdź pod adres `http://localhost:5000` w swojej przeglądarce internetowej. Następnie możesz szyfrować lub deszyfrować wiadomości przy użyciu dostarczonego interfejsu.
 
+## Licencja
+Ten projekt jest dostępny na licencji [MIT License](LICENSE).
+
 ## Linki
 - [Dokumentacja ASP.NET](https://docs.microsoft.com/en-us/aspnet/)
 - [Szyfr Polibiusa](https://en.wikipedia.org/wiki/Polybius_square)
